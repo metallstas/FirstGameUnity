@@ -6,9 +6,17 @@ public class Player : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
-    [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private float jumpForce = 15.0f;
+    [Header("MovmentDetails")]
+    [SerializeField] private float moveSpeed = 8.0f;
+    [SerializeField] private float jumpForce = 12.0f;
     private float xInput;
+    private bool isFacingRight = true;
+
+
+    [Header("CollisionDetails")]
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask whatIsGround;
+    private bool isGrounded;
 
     private void Awake()
     {
@@ -17,19 +25,21 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        handleInput();
-        handleMovment();
-        handleAnimations();
+        HandleCollision();
+        HandleInput();
+        HandleMovment();
+        HandleAnimations();
+        HandleFlip();
        
     }
 
-    private void handleAnimations()
+    private void HandleAnimations()
     {
         bool isMoving = rb.linearVelocityX != 0;
         anim.SetBool("isMoving", isMoving);
     }
 
-    private void handleInput()
+    private void HandleInput()
     {
         xInput = Input.GetAxis("Horizontal");
 
@@ -42,11 +52,36 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
+        if (isGrounded)
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
     }
 
-    private void handleMovment()
+    private void HandleCollision()
+    {
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+    }
+
+    private void HandleMovment()
     {
         rb.linearVelocity = new Vector2(xInput * moveSpeed, rb.linearVelocity.y);
+    }
+
+    private void HandleFlip()
+    {
+        if (rb.linearVelocityX > 0 && isFacingRight == false)
+            Flip();
+        else if (rb.linearVelocityX < 0 && isFacingRight == true)
+            Flip();
+    }
+
+    private void Flip()
+    {
+        transform.Rotate(0, 180, 0);
+        isFacingRight = !isFacingRight;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
     }
 }
