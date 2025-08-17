@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     [Header("MovmentDetails")]
     [SerializeField] private float moveSpeed = 8.0f;
-    [SerializeField] private float jumpForce = 12.0f;
+    [SerializeField] private float jumpForce = 13.0f;
     private float xInput;
     private bool isFacingRight = true;
 
@@ -35,8 +35,9 @@ public class Player : MonoBehaviour
 
     private void HandleAnimations()
     {
-        bool isMoving = rb.linearVelocityX != 0;
-        anim.SetBool("isMoving", isMoving);
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("xVelocity", rb.linearVelocity.x);
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
     private void HandleInput()
