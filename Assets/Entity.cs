@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Entity : MonoBehaviour
 {
-    private Animator anim;
-    private Rigidbody2D rb;
+    protected Animator anim;
+    protected Rigidbody2D rb;
 
     [Header("Attack Details")]
-    [SerializeField] private float attackRadius;
-    [SerializeField] private Transform attackPoint;
-    [SerializeField] private LayerMask whatEnemy;
-
+    [SerializeField] protected float attackRadius;
+    [SerializeField] protected Transform attackPoint;
+    [SerializeField] protected LayerMask whatEnemy;
+    
     [Header("MovmentDetails")]
-    [SerializeField] private float moveSpeed = 8.0f;
+    [SerializeField] protected float moveSpeed = 8.0f;
     [SerializeField] private float jumpForce = 13.0f;
     private float xInput;
     private bool isFacingRight = true;
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatEnemy);
         foreach (Collider2D enemy in enemyColliders)
         {
-            enemy.GetComponent<Enemy>().TakeDamage();
+            //enemy.GetComponent<Enemy>().TakeDamage();
         }
     }
 
