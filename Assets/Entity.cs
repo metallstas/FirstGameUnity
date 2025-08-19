@@ -12,14 +12,15 @@ public class Entity : MonoBehaviour
     [Header("Attack Details")]
     [SerializeField] protected float attackRadius;
     [SerializeField] protected Transform attackPoint;
-    [SerializeField] protected LayerMask whatEnemy;
+    [SerializeField] protected LayerMask whatIsTarget;
     
     [Header("MovmentDetails")]
     [SerializeField] protected float moveSpeed = 8.0f;
     [SerializeField] private float jumpForce = 13.0f;
+    protected int facingDir = 1;
     private float xInput;
     private bool isFacingRight = true;
-    private bool canMove = true;
+    protected bool canMove = true;
     private bool canJump = true;
 
 
@@ -33,23 +34,28 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
-    private void Update()
+    protected virtual void Update()
     {
         HandleCollision();
         HandleInput();
-        HandleMovment();
+        HandleMovment(xInput);
         HandleAnimations();
         HandleFlip();
        
     }
 
-    public void DamageEnemies()
+    public void DamageTargets()
     {
-        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatEnemy);
-        foreach (Collider2D enemy in enemyColliders)
+        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatIsTarget);
+        foreach (Collider2D entity in enemyColliders)
         {
-            //enemy.GetComponent<Enemy>().TakeDamage();
+            entity.GetComponent<Entity>().TakeDamage();
         }
+    }
+
+    private void TakeDamage()
+    {
+        throw new NotImplementedException();
     }
 
     public void EnableMovmentAndJump(bool enable)
@@ -58,7 +64,7 @@ public class Entity : MonoBehaviour
         canMove = enable;
     }
 
-    private void HandleAnimations()
+    protected void HandleAnimations()
     {
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("xVelocity", rb.linearVelocity.x);
@@ -81,7 +87,7 @@ public class Entity : MonoBehaviour
       
     }
 
-    private void TryToAttack()
+    protected virtual void TryToAttack()
     {
         if (isGrounded)
             anim.SetTrigger("attack");
@@ -93,21 +99,21 @@ public class Entity : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
     }
 
-    private void HandleCollision()
+    protected virtual void HandleCollision()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
-    private void HandleMovment()
+    protected virtual void HandleMovment(float xDirection)
     {
         if (canMove)
-            rb.linearVelocity = new Vector2(xInput * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(xDirection * moveSpeed, rb.linearVelocity.y);
         else
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
 
     }
 
-    private void HandleFlip()
+    protected void HandleFlip()
     {
         if (rb.linearVelocityX > 0 && isFacingRight == false)
             Flip();
@@ -119,6 +125,7 @@ public class Entity : MonoBehaviour
     {
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;
+        facingDir *= -1;
     }
 
     private void OnDrawGizmos()
