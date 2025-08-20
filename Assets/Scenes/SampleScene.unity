@@ -655,6 +655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448a9c83d69f1004cae2adfeac7f81a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
+  currentHelth: 0
   attackRadius: 1
   attackPoint: {fileID: 1913477046}
   whatIsTarget:
@@ -717,8 +719,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.002663374, y: 0.036562562}
-  m_Size: {x: 0.90365267, y: 1.7686605}
+  m_Offset: {x: -0.082440615, y: 0.026156962}
+  m_Size: {x: 0.7857213, y: 1.7894717}
   m_Direction: 0
 --- !u!1 &1483864194
 GameObject:
@@ -1097,11 +1099,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249e0c19d023e7c4eb2aff8d721b4647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHelth: 0
   attackRadius: 0.7
   attackPoint: {fileID: 1799084552}
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   moveSpeed: 8
   jumpForce: 15
   groundCheckDistance: 1.4

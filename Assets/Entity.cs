@@ -8,6 +8,11 @@ public class Entity : MonoBehaviour
 {
     protected Animator anim;
     protected Rigidbody2D rb;
+    protected Collider2D col;
+
+    [Header("Health")]
+    [SerializeField] private int maxHealth = 1;
+    [SerializeField] private int currentHelth;
 
     [Header("Attack Details")]
     [SerializeField] protected float attackRadius;
@@ -33,6 +38,8 @@ public class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        col = GetComponent<Collider2D>();
+        currentHelth = maxHealth;
     }
     protected virtual void Update()
     {
@@ -49,19 +56,31 @@ public class Entity : MonoBehaviour
         Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatIsTarget);
         foreach (Collider2D entity in enemyColliders)
         {
-            //entity.GetComponent<Entity>().TakeDamage();
+            entity.GetComponent<Entity>().TakeDamage();
         }
     }
 
     private void TakeDamage()
     {
-        throw new NotImplementedException();
+        currentHelth -= 1;
+
+        if (currentHelth <= 0)
+            Die();
+    }
+
+    protected virtual void Die()
+    {
+        anim.enabled = false;
+        col.enabled = false;
+
+        rb.gravityScale = 12;
+        rb.linearVelocity = new Vector2(rb.linearVelocityX, 15);
     }
 
     public void EnableMovmentAndJump(bool enable)
     {
         canJump = enable;
-        canMove = enable;
+        canMove = enable;  
     }
 
     protected void HandleAnimations()
