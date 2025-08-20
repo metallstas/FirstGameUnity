@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 1034938279}
   - component: {fileID: 1034938281}
   - component: {fileID: 1034938280}
+  - component: {fileID: 1034938282}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -501,7 +502,7 @@ Transform:
   m_GameObject: {fileID: 1034938278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: 0.31, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0.3, z: 0}
   m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -584,6 +585,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1034938282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034938278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d74c9160b9c8bd41b2bc96aec0c6908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1115450335
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448a9c83d69f1004cae2adfeac7f81a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRadius: 0
+  attackRadius: 1
   attackPoint: {fileID: 1913477046}
   whatIsTarget:
     serializedVersion: 2
@@ -662,7 +675,7 @@ Transform:
   m_GameObject: {fileID: 1115450335}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.86, y: -2.09, z: 0}
+  m_LocalPosition: {x: -7.6, y: -2.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -704,8 +717,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0025599003, y: 0}
-  m_Size: {x: 0.872314, y: 1.8}
+  m_Offset: {x: -0.002663374, y: 0.036562562}
+  m_Size: {x: 0.90365267, y: 1.7686605}
   m_Direction: 0
 --- !u!1 &1483864194
 GameObject:
@@ -974,7 +987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799084552}
   m_Layer: 0
-  m_Name: AttacPoint
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1020,9 +1033,9 @@ Transform:
   m_GameObject: {fileID: 1913477045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.37, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1115450338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1104,7 +1117,7 @@ Transform:
   m_GameObject: {fileID: 1966973167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.77, y: 3.38, z: 0}
+  m_LocalPosition: {x: 0.22, y: -1.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

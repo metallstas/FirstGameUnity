@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour
     [Header("CollisionDetails")]
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
-    private bool isGrounded;
+    protected bool isGrounded;
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class Entity : MonoBehaviour
         Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatIsTarget);
         foreach (Collider2D entity in enemyColliders)
         {
-            entity.GetComponent<Entity>().TakeDamage();
+            //entity.GetComponent<Entity>().TakeDamage();
         }
     }
 
@@ -82,12 +82,12 @@ public class Entity : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            TryToAttack();
+            HandleAttack();
         }
       
     }
 
-    protected virtual void TryToAttack()
+    protected virtual void HandleAttack()
     {
         if (isGrounded)
             anim.SetTrigger("attack");
@@ -128,7 +128,7 @@ public class Entity : MonoBehaviour
         facingDir *= -1;
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
         Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
