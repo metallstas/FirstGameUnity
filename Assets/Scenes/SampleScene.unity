@@ -657,6 +657,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHelth: 0
+  damageMaterial: {fileID: 2100000, guid: 3ec68420468c2a1459b578da076ade46, type: 2}
+  damageFeedbackDuration: 0.2
   attackRadius: 1
   attackPoint: {fileID: 1913477046}
   whatIsTarget:
@@ -1101,6 +1103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHelth: 0
+  damageMaterial: {fileID: 2100000, guid: 3ec68420468c2a1459b578da076ade46, type: 2}
+  damageFeedbackDuration: 0.2
   attackRadius: 0.7
   attackPoint: {fileID: 1799084552}
   whatIsTarget:
