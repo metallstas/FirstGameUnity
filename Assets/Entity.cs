@@ -25,7 +25,6 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float moveSpeed = 8.0f;
     [SerializeField] private float jumpForce = 13.0f;
     protected int facingDir = 1;
-    private float xInput;
     protected bool isFacingRight = true;
     protected bool canMove = true;
     private bool canJump = true;
@@ -49,7 +48,7 @@ public class Entity : MonoBehaviour
     {
         HandleCollision();
         HandleInput();
-        HandleMovment(xInput);
+        //HandleMovment(xInput);
         HandleAnimations();
         HandleFlip();
        
@@ -119,14 +118,10 @@ public class Entity : MonoBehaviour
         xInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             TryToJump();
-        }
 
         if (Input.GetKeyDown(KeyCode.J))
-        {
             HandleAttack();
-        }
       
     }
 
