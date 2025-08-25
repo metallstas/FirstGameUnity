@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private float jumpForce = 13.0f;
     protected int facingDir = 1;
     private float xInput;
-    private bool isFacingRight = true;
+    protected bool isFacingRight = true;
     protected bool canMove = true;
     private bool canJump = true;
 
@@ -156,7 +156,7 @@ public class Entity : MonoBehaviour
 
     }
 
-    protected void HandleFlip()
+    protected virtual void HandleFlip()
     {
         if (rb.linearVelocityX > 0 && isFacingRight == false)
             Flip();
@@ -164,7 +164,7 @@ public class Entity : MonoBehaviour
             Flip();
     }
 
-    private void Flip()
+    protected void Flip()
     {
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;
@@ -174,6 +174,8 @@ public class Entity : MonoBehaviour
     protected void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
-        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+
+        if (attackPoint != null)
+            Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 }
