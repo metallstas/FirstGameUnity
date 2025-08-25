@@ -1127,11 +1127,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   moveSpeed: 2
-  jumpForce: 13
   groundCheckDistance: 1.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  moveSpeed: 2
 --- !u!4 &1115450338
 Transform:
   m_ObjectHideFlags: 0
@@ -1307,7 +1307,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   moveSpeed: 8
-  jumpForce: 13
   groundCheckDistance: 0
   whatIsGround:
     serializedVersion: 2
@@ -2102,6 +2101,7 @@ GameObject:
   - component: {fileID: 1966973169}
   - component: {fileID: 1966973168}
   - component: {fileID: 1966973172}
+  - component: {fileID: 1966973173}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -2143,7 +2143,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966973167}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249e0c19d023e7c4eb2aff8d721b4647, type: 3}
   m_Name: 
@@ -2158,7 +2158,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   moveSpeed: 8
-  jumpForce: 15
   groundCheckDistance: 1.4
   whatIsGround:
     serializedVersion: 2
@@ -2217,6 +2216,34 @@ CapsuleCollider2D:
   m_Offset: {x: 0.00888145, y: -0.26}
   m_Size: {x: 0.68812823, y: 2.04349}
   m_Direction: 0
+--- !u!114 &1966973173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966973167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ccc128843ad144780bb49468a2991d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHelth: 0
+  damageMaterial: {fileID: 2100000, guid: 3ec68420468c2a1459b578da076ade46, type: 2}
+  damageFeedbackDuration: 0.1
+  attackRadius: 1
+  attackPoint: {fileID: 0}
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 128
+  moveSpeed: 8
+  groundCheckDistance: 1.45
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  moveSpeed: 8
+  jumpForce: 13
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

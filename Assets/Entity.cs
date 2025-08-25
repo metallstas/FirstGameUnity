@@ -20,22 +20,20 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float attackRadius;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected LayerMask whatIsTarget;
-    
-    [Header("MovmentDetails")]
-    [SerializeField] protected float moveSpeed = 8.0f;
-    [SerializeField] private float jumpForce = 13.0f;
+
     protected int facingDir = 1;
     protected bool isFacingRight = true;
     protected bool canMove = true;
-    private bool canJump = true;
 
+    [Header("Movment Details")]
+    [SerializeField] protected float moveSpeed = 8.0f;
 
-    [Header("CollisionDetails")]
+    [Header("Collision Details")]
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
     protected bool isGrounded;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -47,11 +45,8 @@ public class Entity : MonoBehaviour
     protected virtual void Update()
     {
         HandleCollision();
-        HandleInput();
-        //HandleMovment(xInput);
         HandleAnimations();
-        HandleFlip();
-       
+        HandleFlip();  
     }
 
     public void DamageTargets()
@@ -98,11 +93,12 @@ public class Entity : MonoBehaviour
 
         rb.gravityScale = 12;
         rb.linearVelocity = new Vector2(rb.linearVelocityX, 15);
+
+        Destroy(gameObject, 3);
     }
 
-    public void EnableMovmentAndJump(bool enable)
+    public virtual void EnableMovment(bool enable)
     {
-        canJump = enable;
         canMove = enable;  
     }
 
@@ -113,28 +109,10 @@ public class Entity : MonoBehaviour
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
-    private void HandleInput()
-    {
-        xInput = Input.GetAxis("Horizontal");
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            TryToJump();
-
-        if (Input.GetKeyDown(KeyCode.J))
-            HandleAttack();
-      
-    }
-
     protected virtual void HandleAttack()
     {
         if (isGrounded)
             anim.SetTrigger("attack");
-    }
-
-    private void TryToJump()
-    {
-        if (isGrounded && canJump)
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
     }
 
     protected virtual void HandleCollision()

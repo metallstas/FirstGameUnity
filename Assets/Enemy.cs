@@ -3,14 +3,27 @@ using UnityEngine;
 public class Enemy : Entity
 {
     private bool playerDetected;
+    private Transform player;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        player = FindFirstObjectByType<Player>().transform;
+    }
 
     protected override void Update()
     {
-        HandleCollision();
-        HandleAnimations();
+        base.Update();
         HandleMovment(facingDir);
-        HandleFlip();
         HandleAttack();
+    }
+
+    protected override void HandleFlip()
+    {
+        if (player != null)
+            return;
+
+        base.HandleFlip();
     }
 
     protected override void HandleAttack()
