@@ -24,6 +24,8 @@ public class Entity : MonoBehaviour
     protected int facingDir = 1;
     protected bool isFacingRight = true;
     protected bool canMove = true;
+    protected bool canJump = true;
+
 
     [Header("Movment Details")]
     [SerializeField] protected float moveSpeed = 8.0f;
@@ -58,7 +60,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    private void TakeDamage()
+    protected void TakeDamage()
     {
         currentHelth -= 1;
         PlayDamageFeedback();
@@ -99,7 +101,8 @@ public class Entity : MonoBehaviour
 
     public virtual void EnableMovment(bool enable)
     {
-        canMove = enable;  
+        canMove = enable;
+        canJump = enable;
     }
 
     protected void HandleAnimations()
@@ -111,8 +114,9 @@ public class Entity : MonoBehaviour
 
     protected virtual void HandleAttack()
     {
-        if (isGrounded)
+        if (isGrounded) 
             anim.SetTrigger("attack");
+
     }
 
     protected virtual void HandleCollision()
@@ -137,7 +141,7 @@ public class Entity : MonoBehaviour
             Flip();
     }
 
-    protected void Flip()
+    public void Flip()
     {
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;

@@ -3,7 +3,6 @@ using UnityEngine;
 public class Player : Entity
 {
     private float xInput;
-    private bool canJump = true;
 
     [Header("MovmentDetails")]
     [SerializeField] private float jumpForce = 13.0f;
@@ -28,11 +27,11 @@ public class Player : Entity
 
     }
 
-    public override void EnableMovment(bool enable)
-    {
-        base.EnableMovment(enable);
-        canJump = enable;
-    }
+    //public override void EnableMovment(bool enable)
+    //{
+    //    base.EnableMovment(enable);
+    //    canJump = enable;
+    //}
 
     private void TryToJump()
     {
