@@ -33,10 +33,16 @@ public class Player : Entity
         base.EnableMovment(enable);
         canJump = enable;
     }
+
     private void TryToJump()
     {
         if (isGrounded && canJump)
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        UI.instace.EnableGameOver();
+    }
 }
